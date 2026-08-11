@@ -3,23 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Ritika | A Birthday Surprise</title>
+<title>For Ritika | A Birthday Surprise by Suman Seth</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@200..800&family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@200..800&family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
-    --bg:#150810;
-    --bg-2:#241019;
-    --bg-3:#3a1722;
+    --bg:#0a0410;
+    --bg-2:#1a0a1e;
+    --bg-3:#2a1025;
     --fg:#fdf2e9;
     --muted:#c9a890;
     --accent:#e8b4a0;
     --accent-2:#d4af37;
     --rose:#e91e63;
     --rose-soft:#f8bbd0;
+    --purple:#9c27b0;
+    --blue:#2196f3;
+    --cyan:#00e5ff;
+    --teal:#1de9b6;
+    --orange:#ff6f00;
+    --pink:#ff4081;
     --card:rgba(255,240,230,0.04);
     --border:rgba(232,180,160,0.18);
   }
@@ -28,6 +34,7 @@
   body{background:var(--bg);color:var(--fg);font-family:'Manrope',sans-serif;overflow-x:hidden}
   .font-display{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144}
   .font-script{font-family:'Caveat',cursive}
+  .font-dancing{font-family:'Dancing Script',cursive}
   .font-serif-italic{font-family:'Cormorant Garamond',serif;font-style:italic}
 
   /* Grain Texture */
@@ -36,11 +43,11 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   }
 
-  /* Animated Gradient Background */
+  /* Multi-color Animated Background */
   .hero-bg{
-    background:linear-gradient(135deg, #15080c, #2a1119, #3a1722, #2a1119, #15080c);
+    background:linear-gradient(135deg, #0a0410, #1a0a2e, #2a1045, #1e0a1e, #0a0410, #1a0a2e);
     background-size:400% 400%;
-    animation:gradientShift 15s ease infinite;
+    animation:gradientShift 12s ease infinite;
   }
   @keyframes gradientShift{
     0%{background-position:0% 50%}
@@ -48,22 +55,44 @@
     100%{background-position:0% 50%}
   }
 
+  /* Floating Orbs Background */
+  .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.25;pointer-events:none;animation:orbFloat 20s ease-in-out infinite}
+  @keyframes orbFloat{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(40px,-50px) scale(1.15)}
+    66%{transform:translate(-30px,40px) scale(0.9)}
+  }
+
+  /* Floating Bubbles */
+  .bubble{position:absolute;border-radius:50%;pointer-events:none;animation:bubbleFloat linear infinite}
+  @keyframes bubbleFloat{
+    0%{transform:translateY(100vh) translateX(0);opacity:0}
+    10%{opacity:0.6}
+    90%{opacity:0.6}
+    100%{transform:translateY(-100px) translateX(50px);opacity:0}
+  }
+
   /* Intro Gift */
   .intro-overlay{
-    position:fixed;inset:0;background:linear-gradient(135deg,#15080c,#2a1119);
+    position:fixed;inset:0;
+    background:linear-gradient(135deg,#0a0410,#1a0a2e,#2a1045,#1a0a1e);
+    background-size:400% 400%;
+    animation:gradientShift 10s ease infinite;
     z-index:1000;display:flex;align-items:center;justify-content:center;
     transition:opacity 1s,visibility 1s;
   }
   .intro-overlay.hidden-intro{opacity:0;visibility:hidden;pointer-events:none}
+  .intro-orb{position:absolute;border-radius:50%;filter:blur(50px);opacity:0.3;animation:orbFloat 15s ease-in-out infinite}
   .gift-box{position:relative;width:130px;height:130px;cursor:pointer;animation:float 3s ease-in-out infinite;margin:0 auto;perspective:1000px}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   .gift-box .lid{position:absolute;top:0;left:-6px;right:-6px;height:38px;background:linear-gradient(135deg,#e91e63,#ad1457);border-radius:6px;transition:transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);z-index:3;box-shadow:0 4px 10px rgba(0,0,0,.4)}
   .gift-box .body{position:absolute;bottom:0;left:0;right:0;height:92px;background:linear-gradient(135deg,#d4af37,#b88a2a);border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
   .gift-box .ribbon-v{position:absolute;left:50%;top:0;bottom:0;width:14px;background:#e91e63;transform:translateX(-50%);z-index:2}
   .gift-box .ribbon-h{position:absolute;left:-6px;right:-6px;top:16px;height:14px;background:#e91e63;z-index:4}
-  .gift-box .bow{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:38px;color:#e91e63;z-index:5;text-shadow:0 0 20px rgba(233,30,99,.6);animation:wiggle 2s ease-in-out infinite}
+  .gift-box .bow{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:38px;color:#e91e63;z-index:5;text-shadow:0 0 20px rgba(233,30,99,.6),0 0 40px rgba(233,30,99,.4);animation:wiggle 2s ease-in-out infinite}
   @keyframes wiggle{0%,100%{transform:translateX(-50%) rotate(-10deg)}50%{transform:translateX(-50%) rotate(10deg)}}
   .gift-box:hover .lid{transform:translateY(-30px) rotate(-8deg)}
+  .gift-box:hover{animation:float 1s ease-in-out infinite}
 
   /* Petals */
   .petal{position:fixed;top:-30px;pointer-events:none;z-index:5;animation:fall linear infinite}
@@ -75,31 +104,48 @@
   }
 
   /* Music Button */
-  .music-btn{position:fixed;top:22px;right:22px;z-index:60;width:50px;height:50px;border-radius:50%;background:rgba(232,180,160,0.08);backdrop-filter:blur(12px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .35s;color:var(--accent)}
-  .music-btn:hover{background:rgba(232,180,160,0.2);transform:scale(1.1)}
+  .music-btn{position:fixed;top:22px;right:22px;z-index:60;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(233,30,99,0.2),rgba(212,175,55,0.2));backdrop-filter:blur(12px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .35s;color:var(--accent)}
+  .music-btn:hover{background:linear-gradient(135deg,rgba(233,30,99,0.4),rgba(212,175,55,0.4));transform:scale(1.15) rotate(10deg);box-shadow:0 0 25px rgba(233,30,99,.4)}
   .music-btn.playing i{animation:spin 3s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   /* 3D Photo Card */
   .photo-card-3d{overflow:hidden;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .4s ease;border-radius:2px;perspective:1000px}
-  .photo-card-3d .shine{position:absolute;top:0;left:-150%;width:60%;height:100%;background:linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);transform:skewX(-25deg);z-index:2;pointer-events:none;transition:left .8s ease}
+  .photo-card-3d .shine{position:absolute;top:0;left:-150%;width:60%;height:100%;background:linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);transform:skewX(-25deg);z-index:2;pointer-events:none;transition:left .8s ease}
   .photo-card-3d:hover .shine{left:150%}
-  .photo-card-3d img{transition:transform 1s cubic-bezier(.2,.8,.2,1);width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02);animation:kenburns 20s ease-in-out infinite alternate}
+  .photo-card-3d img{transition:transform 1s cubic-bezier(.2,.8,.2,1),filter .5s;width:100%;height:100%;object-fit:cover;filter:saturate(.95) contrast(1.02);animation:kenburns 20s ease-in-out infinite alternate}
   @keyframes kenburns{0%{transform:scale(1)}100%{transform:scale(1.08)}}
-  .photo-card-3d:hover img{filter:saturate(1.2) contrast(1.05)}
-  .photo-card-3d::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(21,8,12,.85));opacity:0;transition:opacity .5s;pointer-events:none;z-index:1}
+  .photo-card-3d:hover img{filter:saturate(1.3) contrast(1.05) brightness(1.05)}
+  .photo-card-3d::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,4,16,.85));opacity:0;transition:opacity .5s;pointer-events:none;z-index:1}
   .photo-card-3d:hover::after{opacity:1}
-  .photo-card-3d .label{position:absolute;bottom:14px;left:14px;font-family:'Caveat',cursive;font-size:1.4rem;color:var(--rose-soft);opacity:0;transform:translateY(10px);transition:all .5s;z-index:2}
+  .photo-card-3d .label{position:absolute;bottom:14px;left:14px;font-family:'Caveat',cursive;font-size:1.4rem;color:var(--rose-soft);opacity:0;transform:translateY(10px);transition:all .5s;z-index:2;text-shadow:0 2px 10px rgba(0,0,0,.5)}
   .photo-card-3d:hover .label{opacity:1;transform:translateY(0)}
+  
+  /* Animated Gradient Border for Gallery Cards */
+  .photo-card-3d::before{
+    content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+    border-radius:2px;padding:2px;
+    background:linear-gradient(135deg,transparent,transparent);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .5s;
+  }
+  .photo-card-3d:hover::before{
+    opacity:1;
+    background:linear-gradient(135deg,var(--rose),var(--accent-2),var(--cyan),var(--rose));
+    background-size:300% 300%;
+    animation:borderShimmer 3s linear infinite;
+  }
+  @keyframes borderShimmer{0%{background-position:0% 0%}100%{background-position:300% 300%}}
 
   /* Hero Photo Frame */
   .photo-frame{position:relative;animation:floatY 6s ease-in-out infinite}
   @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-  .photo-frame::before,.photo-frame::after{content:'';position:absolute;width:32px;height:32px;border:2px solid var(--accent-2);z-index:3;transition:all .5s}
-  .photo-frame::before{top:-10px;left:-10px;border-right:none;border-bottom:none}
-  .photo-frame::after{bottom:-10px;right:-10px;border-left:none;border-top:none}
-  .photo-frame:hover::before{top:-15px;left:-15px}
-  .photo-frame:hover::after{bottom:-15px;right:-15px}
+  .photo-frame::before,.photo-frame::after{content:'';position:absolute;width:40px;height:40px;z-index:3;transition:all .5s}
+  .photo-frame::before{top:-12px;left:-12px;border-top:3px solid var(--accent-2);border-left:3px solid var(--accent-2)}
+  .photo-frame::after{bottom:-12px;right:-12px;border-bottom:3px solid var(--accent-2);border-right:3px solid var(--accent-2)}
+  .photo-frame:hover::before{top:-18px;left:-18px;border-color:var(--rose)}
+  .photo-frame:hover::after{bottom:-18px;right:-18px;border-color:var(--rose)}
 
   /* Reveal Animations */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
@@ -110,11 +156,20 @@
   .mask-reveal span{display:inline-block;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
   .reveal.in-view .mask-reveal span{transform:translateY(0)}
 
+  /* Color-shifting text */
+  .color-shift{
+    background:linear-gradient(90deg,#e91e63,#ff6f00,#d4af37,#1de9b6,#00e5ff,#9c27b0,#e91e63);
+    background-size:300% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:colorShift 6s linear infinite;
+  }
+  @keyframes colorShift{to{background-position:300% center}}
+
   /* Letter */
   .letter-paper{
     background:linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98));
     color:#4a1a1f;
-    box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 0 120px rgba(180,80,80,.08);
+    box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 0 120px rgba(180,80,80,.08),0 0 60px rgba(233,30,99,.15);
     position:relative;
     background-image:linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98)),repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(180,80,80,.07) 28px,rgba(180,80,80,.07) 29px);
     transform:rotate(-1deg);
@@ -123,22 +178,33 @@
   .letter-paper:hover{transform:rotate(0deg) scale(1.01)}
   .letter-paper::before{content:'';position:absolute;left:50px;top:30px;bottom:30px;width:1px;background:rgba(233,30,99,.25)}
   .letter-paper::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 40px 40px 0;border-color:transparent rgba(0,0,0,.08) transparent transparent}
+  .letter-stamp{position:absolute;top:25px;right:40px;width:60px;height:60px;border:2px dashed rgba(233,30,99,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:rgba(233,30,99,.4);transform:rotate(15deg);animation:stampRotate 10s linear infinite}
+  @keyframes stampRotate{to{transform:rotate(375deg)}}
 
   /* Memory Card */
-  .memory-card{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px);transition:all .5s;position:relative;overflow:hidden}
-  .memory-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 50%,rgba(232,180,160,.08));opacity:0;transition:opacity .5s}
-  .memory-card:hover{transform:translateY(-6px);border-color:var(--accent-2);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+  .memory-card{background:linear-gradient(135deg,rgba(255,240,230,0.03),rgba(255,240,230,0.06));border:1px solid var(--border);backdrop-filter:blur(10px);transition:all .5s;position:relative;overflow:hidden}
+  .memory-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 50%,rgba(232,180,160,.1));opacity:0;transition:opacity .5s}
+  .memory-card:hover{transform:translateY(-8px) scale(1.02);border-color:var(--accent-2);box-shadow:0 20px 50px rgba(0,0,0,0.4),0 0 30px rgba(212,175,55,.15)}
   .memory-card:hover::before{opacity:1}
   .memory-card .icon{transition:transform .5s;animation:iconFloat 4s ease-in-out infinite}
   @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .memory-card:hover .icon{animation:none;transform:rotate(-10deg) scale(1.2)}
-  .memory-card .shine-sweep{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right, transparent, rgba(232,180,160,0.15), transparent);transform:skewX(-20deg);transition:left .8s ease}
+  .memory-card:hover .icon{animation:none;transform:rotate(-15deg) scale(1.3)}
+  .memory-card .shine-sweep{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);transform:skewX(-20deg);transition:left .8s ease;pointer-events:none}
   .memory-card:hover .shine-sweep{left:150%}
+  
+  /* Memory card colored glow per card */
+  .memory-card:nth-child(1) .icon{color:#ff6f00;text-shadow:0 0 20px rgba(255,111,0,.4)}
+  .memory-card:nth-child(2) .icon{color:#e91e63;text-shadow:0 0 20px rgba(233,30,99,.4)}
+  .memory-card:nth-child(3) .icon{color:#d4af37;text-shadow:0 0 20px rgba(212,175,55,.4)}
+  .memory-card:nth-child(4) .icon{color:#1de9b6;text-shadow:0 0 20px rgba(29,233,182,.4)}
+  .memory-card:nth-child(5) .icon{color:#00e5ff;text-shadow:0 0 20px rgba(0,229,255,.4)}
+  .memory-card:nth-child(6) .icon{color:#9c27b0;text-shadow:0 0 20px rgba(156,39,176,.4)}
 
   /* Cake */
   .cake-container{position:relative;width:320px;height:380px;margin:0 auto;animation:floatY 4s ease-in-out infinite}
-  .cake-aura{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle, rgba(232,180,160,0.15), transparent 70%);z-index:-1;animation:pulseAura 4s ease-in-out infinite}
-  @keyframes pulseAura{0%,100%{opacity:0.5;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
+  .cake-aura{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle, rgba(232,180,160,0.2), transparent 70%);z-index:-1;animation:pulseAura 4s ease-in-out infinite}
+  .cake-aura-2{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:350px;height:350px;background:radial-gradient(circle, rgba(233,30,99,0.12), transparent 70%);z-index:-1;animation:pulseAura 5s ease-in-out infinite reverse}
+  @keyframes pulseAura{0%,100%{opacity:0.5;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.15)}}
   .cake-plate{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:310px;height:18px;background:linear-gradient(180deg,#e8b4a0 0%,#c9a890 50%,#7a5a45 100%);border-radius:50% / 100%;box-shadow:0 10px 30px rgba(0,0,0,.5)}
   .cake-tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:6px}
   .cake-tier.bottom{bottom:14px;width:260px;height:105px;background:linear-gradient(180deg,#f8bbd0 0%,#f48fb1 45%,#c2185b 100%);box-shadow:inset 0 -12px 0 rgba(0,0,0,.15),0 4px 14px rgba(0,0,0,.35)}
@@ -157,9 +223,9 @@
   @keyframes smoke{0%{opacity:.6;transform:translateX(-50%) translateY(0) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-40px) scale(2.5)}}
 
   /* Lightbox */
-  .lightbox{position:fixed;inset:0;background:rgba(10,4,8,.96);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+  .lightbox{position:fixed;inset:0;background:rgba(10,4,16,.96);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
   .lightbox.open{opacity:1;visibility:visible}
-  .lightbox img{max-width:92vw;max-height:86vh;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,.7);transform:scale(.9);transition:transform .4s}
+  .lightbox img{max-width:92vw;max-height:86vh;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,.7),0 0 60px rgba(233,30,99,.2);transform:scale(.9);transition:transform .4s}
   .lightbox.open img{transform:scale(1)}
 
   /* Confetti */
@@ -172,23 +238,33 @@
   /* Scrollbar */
   ::-webkit-scrollbar{width:8px}
   ::-webkit-scrollbar-track{background:var(--bg)}
-  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:4px}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent-2),var(--rose));border-radius:4px}
 
   /* Number Stat */
-  .number-stat{font-family:'Fraunces',serif;font-weight:200;font-size:3.6rem;line-height:1;background:linear-gradient(180deg,#e8b4a0,#d4af37);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .number-stat{font-family:'Fraunces',serif;font-weight:200;font-size:3.6rem;line-height:1;background:linear-gradient(135deg,#e8b4a0,#d4af37,#e91e63);-webkit-background-clip:text;background-clip:text;color:transparent;animation:statGlow 3s ease-in-out infinite}
+  @keyframes statGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(212,175,55,.3))}50%{filter:drop-shadow(0 0 16px rgba(233,30,99,.4))}}
   .glow-text{text-shadow:0 0 24px rgba(232,180,160,.45),0 0 48px rgba(233,30,99,.28)}
+  .glow-text-color{text-shadow:0 0 24px rgba(233,30,99,.5),0 0 48px rgba(156,39,176,.3)}
 
   /* Sparkles */
   .sparkle{position:absolute;width:6px;height:6px;background:var(--accent-2);border-radius:50%;box-shadow:0 0 12px var(--accent-2);animation:sparkle 2s ease-in-out infinite}
   @keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
 
   /* Countdown */
-  .countdown-num{font-family:'Fraunces',serif;font-weight:300;font-size:2.4rem;color:var(--accent-2);transition:transform .3s}
+  .countdown-box{
+    background:linear-gradient(135deg,rgba(255,240,230,0.03),rgba(255,240,230,0.06));
+    border:1px solid var(--border);padding:1.5rem 1rem;border-radius:8px;
+    transition:all .4s;position:relative;overflow:hidden;
+  }
+  .countdown-box:hover{border-color:var(--accent-2);transform:translateY(-5px);box-shadow:0 10px 30px rgba(212,175,55,.15)}
+  .countdown-box::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right,transparent,rgba(255,255,255,.1),transparent);transform:skewX(-20deg);transition:left .8s}
+  .countdown-box:hover::before{left:150%}
+  .countdown-num{font-family:'Fraunces',serif;font-weight:300;font-size:2.4rem;background:linear-gradient(180deg,#e8b4a0,#d4af37);-webkit-background-clip:text;background-clip:text;color:transparent;transition:transform .3s}
   .countdown-num.pulse{animation:numberPulse .5s ease}
-  @keyframes numberPulse{0%{transform:scale(1)}50%{transform:scale(1.2);color:var(--rose-soft)}100%{transform:scale(1)}}
+  @keyframes numberPulse{0%{transform:scale(1)}50%{transform:scale(1.25);filter:drop-shadow(0 0 15px var(--rose-soft))}100%{transform:scale(1)}}
 
   /* Toast */
-  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(36,16,25,.95);border:1px solid var(--accent);color:var(--fg);padding:14px 24px;border-radius:4px;font-size:.9rem;letter-spacing:.05em;opacity:0;transition:all .4s;z-index:700;backdrop-filter:blur(10px)}
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,rgba(36,16,25,.95),rgba(26,10,30,.95));border:1px solid var(--accent);color:var(--fg);padding:14px 24px;border-radius:4px;font-size:.9rem;letter-spacing:.05em;opacity:0;transition:all .4s;z-index:700;backdrop-filter:blur(10px);box-shadow:0 10px 40px rgba(233,30,99,.2)}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   /* Heart Burst on blow */
@@ -201,14 +277,49 @@
 
   /* Animated Gradient Text */
   .gradient-text-anim{
-    background:linear-gradient(90deg, #e8b4a0, #d4af37, #e91e63, #d4af37, #e8b4a0);
-    background-size:200% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:textShimmer 4s linear infinite;
+    background:linear-gradient(90deg, #e8b4a0, #d4af37, #e91e63, #ff6f00, #1de9b6, #00e5ff, #9c27b0, #e8b4a0);
+    background-size:300% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:textShimmer 5s linear infinite;
   }
-  @keyframes textShimmer{to{background-position:200% center}}
+  @keyframes textShimmer{to{background-position:300% center}}
+
+  /* Typewriter */
+  .typewriter{
+    display:inline-block;
+    border-right:3px solid var(--accent);
+    animation:blink .8s step-end infinite;
+    overflow:hidden;white-space:nowrap;
+  }
+  @keyframes blink{50%{border-color:transparent}}
+
+  /* Floating decorative icons */
+  .float-icon{position:absolute;pointer-events:none;opacity:0.1;animation:floatRotate 15s ease-in-out infinite}
+  @keyframes floatRotate{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-30px) rotate(180deg)}
+  }
+
+  /* Button glow */
+  .btn-glow{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,transparent,transparent);
+    transition:all .4s;
+  }
+  .btn-glow::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,var(--rose),var(--accent-2));
+    opacity:0;transition:opacity .4s;z-index:-1;
+  }
+  .btn-glow:hover::before{opacity:1}
+  .btn-glow:hover{box-shadow:0 0 30px rgba(233,30,99,.4),0 0 60px rgba(212,175,55,.2);transform:translateY(-2px)}
+
+  /* Final name glow pulse */
+  .name-glow{animation:nameGlow 3s ease-in-out infinite}
+  @keyframes nameGlow{
+    0%,100%{filter:drop-shadow(0 0 20px rgba(233,30,99,.4)) drop-shadow(0 0 40px rgba(212,175,55,.2))}
+    50%{filter:drop-shadow(0 0 30px rgba(233,30,99,.6)) drop-shadow(0 0 60px rgba(212,175,55,.4))}
+  }
 
   @media (max-width:768px){
     .cake-container{transform:scale(.85)}
@@ -220,9 +331,12 @@
 
 <!-- INTRO -->
 <div id="intro" class="intro-overlay">
-  <div class="text-center px-6">
-    <div class="text-xs tracking-[0.5em] uppercase text-[var(--accent)] mb-3">A Surprise For</div>
-    <h1 class="font-script text-7xl md:text-8xl text-[var(--rose-soft)] glow-text mb-2">Ritika Bera</h1>
+  <div class="intro-orb" style="top:10%;left:10%;width:200px;height:200px;background:var(--rose)"></div>
+  <div class="intro-orb" style="bottom:15%;right:10%;width:250px;height:250px;background:var(--purple);animation-delay:3s"></div>
+  <div class="intro-orb" style="top:50%;left:50%;width:300px;height:300px;background:var(--accent-2);animation-delay:6s"></div>
+  <div class="text-center px-6 relative z-10">
+    <div class="text-xs tracking-[0.5em] uppercase text-[var(--accent)] mb-3 animate-pulse">A Surprise For</div>
+    <h1 class="font-dancing text-7xl md:text-9xl gradient-text-anim name-glow mb-2">Ritika Bera</h1>
     <div class="text-sm tracking-[0.35em] uppercase text-[var(--muted)] mb-16">13 · 08 · 2025</div>
     <div class="gift-box" id="giftBox" role="button" tabindex="0" aria-label="Open your surprise">
       <div class="bow"><i class="fas fa-gift"></i></div>
@@ -230,7 +344,7 @@
       <div class="body"><div class="ribbon-v"></div></div>
       <div class="ribbon-h"></div>
     </div>
-    <p class="mt-12 text-[var(--muted)] text-xs tracking-[0.4em] uppercase animate-pulse">Tap to unwrap</p>
+    <p class="mt-12 text-[var(--muted)] text-xs tracking-[0.4em] uppercase animate-pulse">Tap to unwrap your surprise</p>
   </div>
 </div>
 
@@ -247,17 +361,29 @@
 
 <!-- HERO -->
 <section class="hero-bg min-h-screen relative flex items-center pt-24 pb-16 overflow-hidden">
-  <div class="absolute top-1/4 left-8 w-72 h-72 rounded-full bg-[var(--rose)] opacity-10 blur-3xl animate-pulse"></div>
-  <div class="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[var(--accent-2)] opacity-10 blur-3xl animate-pulse" style="animation-delay:1s"></div>
+  <div class="orb" style="top:5%;left:5%;width:300px;height:300px;background:var(--rose)"></div>
+  <div class="orb" style="bottom:10%;right:5%;width:350px;height:350px;background:var(--purple);animation-delay:5s"></div>
+  <div class="orb" style="top:40%;right:20%;width:200px;height:200px;background:var(--cyan);animation-delay:10s"></div>
+  <div class="orb" style="bottom:30%;left:20%;width:250px;height:250px;background:var(--accent-2);animation-delay:7s"></div>
+  
+  <i class="fas fa-heart float-icon" style="top:15%;left:8%;font-size:30px;color:var(--rose);animation-delay:0s"></i>
+  <i class="fas fa-star float-icon" style="top:70%;right:10%;font-size:25px;color:var(--accent-2);animation-delay:2s"></i>
+  <i class="fas fa-feather float-icon" style="top:30%;right:15%;font-size:28px;color:var(--cyan);animation-delay:4s"></i>
+  <i class="fas fa-music float-icon" style="bottom:20%;left:12%;font-size:26px;color:var(--purple);animation-delay:6s"></i>
+
   <div class="sparkle" style="top:20%;left:15%;animation-delay:0s"></div>
   <div class="sparkle" style="top:60%;left:8%;animation-delay:.7s"></div>
   <div class="sparkle" style="top:30%;right:12%;animation-delay:1.2s"></div>
   <div class="sparkle" style="bottom:20%;right:20%;animation-delay:.4s"></div>
+  <div class="sparkle" style="top:50%;left:50%;animation-delay:.9s"></div>
+  <div class="sparkle" style="top:80%;left:40%;animation-delay:1.5s"></div>
 
   <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
     <div class="lg:col-span-7">
       <div class="inline-flex items-center gap-3 text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-8 reveal in-view">
-        <span class="h-px w-12 bg-[var(--accent)]"></span>A celebration of you
+        <span class="h-px w-12 bg-gradient-to-r from-transparent to-[var(--accent)]"></span>
+        <span class="color-shift font-semibold">A celebration of you</span>
+        <span class="h-px w-12 bg-gradient-to-l from-transparent to-[var(--accent)]"></span>
       </div>
       <div class="reveal in-view">
         <span class="mask-reveal"><h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light leading-[0.95] mb-1">Happy</h1></span>
@@ -266,95 +392,105 @@
         <span class="mask-reveal"><h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light italic leading-[0.95] mb-5">Birthday</h1></span>
       </div>
       <div class="reveal in-view" style="transition-delay:.2s">
-        <span class="mask-reveal"><h2 class="font-script text-7xl md:text-8xl xl:text-[9rem] text-[var(--rose-soft)] glow-text leading-none">Ritika</h2></span>
+        <span class="mask-reveal"><h2 class="font-dancing text-7xl md:text-8xl xl:text-[9rem] gradient-text-anim name-glow leading-none">Ritika</h2></span>
       </div>
       <p class="mt-10 text-[var(--muted)] max-w-md text-lg leading-relaxed reveal in-view" style="transition-delay:.3s">
-        Today the universe pauses to celebrate the day it received one of its kindest souls, its loudest laughter, and its truest friend.
+        Today the universe pauses to celebrate the day it received one of its kindest souls, its loudest laughter, and its truest friend. This is for you — from <span class="color-shift font-semibold">Suman Seth</span>.
       </p>
       <div class="mt-12 flex flex-wrap items-center gap-8 reveal in-view" style="transition-delay:.4s">
         <div>
           <div class="number-stat">19</div>
           <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Years of magic</div>
         </div>
-        <div class="h-14 w-px bg-[var(--border)]"></div>
+        <div class="h-14 w-px bg-gradient-to-b from-transparent via-[var(--accent-2)] to-transparent"></div>
         <div>
           <div class="number-stat">13.08</div>
           <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Your golden day</div>
         </div>
-        <div class="h-14 w-px bg-[var(--border)]"></div>
+        <div class="h-14 w-px bg-gradient-to-b from-transparent via-[var(--accent-2)] to-transparent"></div>
         <div>
           <div class="number-stat">∞</div>
-          <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Wishes for you</div>
+          <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Wishes from Suman</div>
         </div>
       </div>
     </div>
 
     <div class="lg:col-span-5 reveal in-view" style="transition-delay:.3s">
       <div class="photo-frame relative">
-        <div class="relative overflow-hidden">
+        <div class="relative overflow-hidden rounded-sm">
           <img src="https://z-cdn-media.chatglm.cn/files/43904bc9-d88c-4c63-8588-7c2042693c80.jpeg?auth_key=1886481642-bb59059648b8471bb18cd5386ec79529-0-7acb5f7cb493c30c25b6b65b0284e602" alt="Ritika" class="w-full h-[520px] md:h-[620px] object-cover" loading="eager">
           <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/70 via-transparent to-transparent pointer-events-none"></div>
         </div>
-        <div class="absolute -bottom-6 -left-6 bg-[var(--bg-2)] border border-[var(--border)] px-6 py-4 backdrop-blur-md">
-          <div class="font-script text-3xl text-[var(--rose-soft)]">my best friend</div>
+        <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-[var(--bg-2)] to-[var(--bg-3)] border border-[var(--border)] px-6 py-4 backdrop-blur-md">
+          <div class="font-dancing text-3xl gradient-text-anim">my best friend</div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-[var(--muted)] text-[10px] tracking-[0.4em] uppercase">
-    <span>scroll for surprise</span>
+    <span class="color-shift">scroll for surprise</span>
     <div class="w-px h-12 bg-gradient-to-b from-[var(--accent)] to-transparent animate-pulse"></div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="border-y border-[var(--border)] py-6 overflow-hidden bg-[var(--bg-2)] relative">
+<div class="border-y border-[var(--border)] py-6 overflow-hidden bg-gradient-to-r from-[var(--bg-2)] via-[var(--bg-3)] to-[var(--bg-2)] relative">
   <div class="marquee">
-    <span class="font-display italic text-3xl mx-10 text-[var(--accent)]">Happy Birthday Ritika</span>
+    <span class="font-display italic text-3xl mx-10 color-shift">Happy Birthday Ritika</span>
     <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
     <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">13 · 08 · 2025</span>
+    <span class="text-2xl mx-6 text-[var(--cyan)]">♥</span>
+    <span class="font-display italic text-3xl mx-10 color-shift">Nineteen years of you</span>
     <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
-    <span class="font-display italic text-3xl mx-10 text-[var(--accent)]">Nineteen years of you</span>
-    <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
-    <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">My favourite person</span>
-    <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
-    <span class="font-display italic text-3xl mx-10 text-[var(--accent)]">Happy Birthday Ritika</span>
+    <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">From Suman Seth</span>
+    <span class="text-2xl mx-6 text-[var(--cyan)]">♥</span>
+    <span class="font-display italic text-3xl mx-10 color-shift">Happy Birthday Ritika</span>
     <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
     <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">13 · 08 · 2025</span>
+    <span class="text-2xl mx-6 text-[var(--cyan)]">♥</span>
+    <span class="font-display italic text-3xl mx-10 color-shift">Nineteen years of you</span>
     <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
-    <span class="font-display italic text-3xl mx-10 text-[var(--accent)]">Nineteen years of you</span>
-    <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
-    <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">My favourite person</span>
-    <span class="text-2xl mx-6 text-[var(--accent-2)]">✦</span>
+    <span class="font-display italic text-3xl mx-10 text-[var(--rose-soft)]">From Suman Seth</span>
+    <span class="text-2xl mx-6 text-[var(--cyan)]">♥</span>
   </div>
 </div>
 
 <!-- SVG DIVIDER -->
-<div class="flex justify-center py-12 reveal">
+<div class="flex justify-center py-12 reveal bg-[var(--bg)]">
   <svg class="divider-svg" width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 20 C 40 5, 60 35, 100 20 C 140 5, 160 35, 190 20" stroke="var(--accent-2)" stroke-width="1.5" fill="none"/>
-    <path d="M100 10 L 105 15 L 110 10 L 105 5 Z" fill="var(--rose)"/>
-    <path d="M100 30 L 105 35 L 110 30 L 105 25 Z" fill="var(--rose)"/>
+    <path d="M10 20 C 40 5, 60 35, 100 20 C 140 5, 160 35, 190 20" stroke="url(#div-grad)" stroke-width="1.5" fill="none"/>
+    <defs>
+      <linearGradient id="div-grad" x1="0" y1="0" x2="200" y2="0">
+        <stop offset="0%" stop-color="#e91e63"/>
+        <stop offset="50%" stop-color="#d4af37"/>
+        <stop offset="100%" stop-color="#00e5ff"/>
+      </linearGradient>
+    </defs>
+    <path d="M100 10 L 105 15 L 110 10 L 105 5 Z" fill="#e91e63"/>
+    <path d="M100 30 L 105 35 L 110 30 L 105 25 Z" fill="#00e5ff"/>
   </svg>
 </div>
 
 <!-- LETTER -->
-<section class="py-12 md:py-20 px-6 relative">
-  <div class="max-w-3xl mx-auto">
+<section class="py-12 md:py-20 px-6 relative bg-[var(--bg)]">
+  <div class="orb" style="top:10%;left:5%;width:200px;height:200px;background:var(--rose);opacity:0.08"></div>
+  <div class="orb" style="bottom:10%;right:5%;width:250px;height:250px;background:var(--purple);opacity:0.08;animation-delay:4s"></div>
+  <div class="max-w-3xl mx-auto relative z-10">
     <div class="text-center mb-12 reveal">
-      <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3">A letter from the heart</div>
-      <h2 class="font-display text-4xl md:text-5xl font-light italic">for you, only you</h2>
+      <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3">A letter from the heart</div>
+      <h2 class="font-display text-4xl md:text-5xl font-light italic">for you, <span class="gradient-text-anim">only you</span></h2>
     </div>
     <div class="letter-paper p-10 md:p-16 reveal" style="transition-delay:.2s">
-      <div class="font-script text-3xl text-[#c2185b] mb-6">Dear Ritika,</div>
+      <div class="letter-stamp"><i class="fas fa-heart"></i></div>
+      <div class="font-dancing text-3xl text-[#c2185b] mb-6">Dear Ritika,</div>
       <div class="space-y-5 font-serif-italic text-lg md:text-xl leading-relaxed text-[#4a1a1f]">
-        <p>Some people enter our lives and quietly rearrange everything — they make the ordinary feel like magic, the hard days softer, and the good days unforgettable. You are that person for me.</p>
+        <p>Some people enter our lives and quietly rearrange everything — they make the ordinary feel like magic, the hard days softer, and the good days unforgettable. <strong>You are that person for me.</strong></p>
         <p>Through every laughter we've shared, every secret we've kept, and every silence we've understood, you've been the constant I never knew I needed. The world became a warmer place the day we became friends.</p>
         <p>Today, as you turn nineteen, I wish you everything you've ever quietly hoped for — the dreams you whisper to the stars, the love you so freely give to others, the success you've earned a hundred times over, and a happiness so deep it spills into every tomorrow.</p>
         <p>Thank you for being you. For being <em>mine</em>. Happy birthday, my dearest best friend.</p>
-        <p class="pt-6 font-script text-2xl text-[#c2185b]">Forever your friend,<br>
-          <span class="text-3xl">— your best friend</span>
+        <p class="pt-6 font-dancing text-2xl text-[#c2185b]">Forever your friend,<br>
+          <span class="text-4xl font-bold gradient-text-anim">— Suman Seth</span>
         </p>
       </div>
     </div>
@@ -362,11 +498,14 @@
 </section>
 
 <!-- GALLERY -->
-<section class="py-24 px-6">
-  <div class="max-w-7xl mx-auto">
+<section class="py-24 px-6 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-2)] to-[var(--bg)] relative overflow-hidden">
+  <div class="orb" style="top:20%;right:5%;width:300px;height:300px;background:var(--cyan);opacity:0.06"></div>
+  <div class="orb" style="bottom:20%;left:5%;width:250px;height:250px;background:var(--rose);opacity:0.06;animation-delay:5s"></div>
+  
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-16 reveal">
-      <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3">A gallery of you</div>
-      <h2 class="font-display text-5xl md:text-6xl font-light">Moments in <em class="italic">motion</em></h2>
+      <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3">A gallery of you</div>
+      <h2 class="font-display text-5xl md:text-6xl font-light">Moments in <em class="italic gradient-text-anim">motion</em></h2>
       <p class="mt-4 text-[var(--muted)]">Every frame, a memory. Every memory, a treasure.</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[260px]">
@@ -430,46 +569,52 @@
 </section>
 
 <!-- MEMORY CARDS -->
-<section class="py-24 px-6 bg-gradient-to-b from-[var(--bg)] to-[var(--bg-2)]">
-  <div class="max-w-7xl mx-auto">
+<section class="py-24 px-6 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-2)] to-[var(--bg)] relative overflow-hidden">
+  <div class="orb" style="top:10%;left:10%;width:250px;height:250px;background:var(--teal);opacity:0.07"></div>
+  <div class="orb" style="bottom:10%;right:10%;width:300px;height:300px;background:var(--orange);opacity:0.07;animation-delay:6s"></div>
+  
+  <i class="fas fa-heart float-icon" style="top:20%;right:8%;font-size:24px;color:var(--rose);animation-delay:1s"></i>
+  <i class="fas fa-star float-icon" style="bottom:25%;left:5%;font-size:22px;color:var(--accent-2);animation-delay:3s"></i>
+  
+  <div class="max-w-7xl mx-auto relative z-10">
     <div class="text-center mb-16 reveal">
-      <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3">why you, why us</div>
-      <h2 class="font-display text-5xl md:text-6xl font-light italic">Things I adore</h2>
+      <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3">why you, why us</div>
+      <h2 class="font-display text-5xl md:text-6xl font-light italic">Things I <span class="gradient-text-anim">adore</span></h2>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="memory-card p-8 reveal">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-laugh-beam"></i></div>
+        <div class="icon text-3xl mb-4"><i class="fas fa-laugh-beam"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Laughter</h3>
         <p class="text-[var(--muted)] leading-relaxed">The kind that fills a room and refuses to leave — turning ordinary afternoons into stories we'll be telling for years.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.1s">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:.5s"><i class="fas fa-shield-heart"></i></div>
+        <div class="icon text-3xl mb-4" style="animation-delay:.5s"><i class="fas fa-shield-heart"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Strength</h3>
         <p class="text-[var(--muted)] leading-relaxed">The way you face storms without losing your softness. You bend, you never break, and you never let anyone else break either.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.2s">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:1s"><i class="fas fa-heart"></i></div>
+        <div class="icon text-3xl mb-4" style="animation-delay:1s"><i class="fas fa-heart"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Heart</h3>
         <p class="text-[var(--muted)] leading-relaxed">Big enough to carry everyone, warm enough to heal what nobody sees. Kindness lives in you like it's the only language you know.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.3s">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:1.5s"><i class="fas fa-feather"></i></div>
+        <div class="icon text-3xl mb-4" style="animation-delay:1.5s"><i class="fas fa-feather"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Spirit</h3>
         <p class="text-[var(--muted)] leading-relaxed">Wild, free, and stubbornly yourself. You don't follow paths — you make them, and somehow make them look easy.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.4s">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:2s"><i class="fas fa-mug-hot"></i></div>
+        <div class="icon text-3xl mb-4" style="animation-delay:2s"><i class="fas fa-mug-hot"></i></div>
         <h3 class="font-display text-2xl mb-3">Our Talks</h3>
         <p class="text-[var(--muted)] leading-relaxed">3 AM calls about nothing and everything. The comfortable silences. The inside jokes no one else would ever understand.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.5s">
         <div class="shine-sweep"></div>
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:2.5s"><i class="fas fa-star"></i></div>
+        <div class="icon text-3xl mb-4" style="animation-delay:2.5s"><i class="fas fa-star"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Dreams</h3>
         <p class="text-[var(--muted)] leading-relaxed">The ones you whisper late at night. I'll always be the loudest one cheering in your corner, no matter where they take you.</p>
       </div>
@@ -478,14 +623,18 @@
 </section>
 
 <!-- CAKE -->
-<section class="py-24 px-6 relative overflow-hidden">
+<section class="py-24 px-6 relative overflow-hidden bg-[var(--bg)]">
   <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 50%, rgba(58,23,34,.5), transparent 60%)"></div>
+  <div class="orb" style="top:20%;left:15%;width:200px;height:200px;background:var(--rose);opacity:0.08"></div>
+  <div class="orb" style="bottom:20%;right:15%;width:250px;height:250px;background:var(--accent-2);opacity:0.08;animation-delay:4s"></div>
+  
   <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3 reveal">make a wish</div>
-    <h2 class="font-display text-5xl md:text-6xl font-light italic mb-16 reveal">Blow out the candles</h2>
+    <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3 reveal">make a wish</div>
+    <h2 class="font-display text-5xl md:text-6xl font-light italic mb-16 reveal">Blow out the <span class="gradient-text-anim">candles</span></h2>
 
     <div class="cake-container reveal" id="cakeContainer">
       <div class="cake-aura"></div>
+      <div class="cake-aura-2"></div>
       <div class="candles-row">
         <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
         <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
@@ -508,36 +657,37 @@
       <div class="cake-plate"></div>
     </div>
 
-    <button id="blowCandlesBtn" class="mt-12 px-8 py-4 border border-[var(--accent)] text-[var(--accent)] tracking-[0.25em] uppercase text-xs hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all duration-300 reveal">
+    <button id="blowCandlesBtn" class="mt-12 px-8 py-4 border border-[var(--accent)] text-[var(--accent)] tracking-[0.25em] uppercase text-xs btn-glow reveal">
       <i class="fas fa-wind mr-2"></i> Blow the candles
     </button>
 
     <div id="wishMessage" class="mt-10 opacity-0 transition-opacity duration-1000">
-      <p class="font-script text-4xl md:text-5xl text-[var(--rose-soft)] glow-text">Your wish has been heard...</p>
+      <p class="font-dancing text-4xl md:text-5xl gradient-text-anim name-glow">Your wish has been heard...</p>
       <p class="text-[var(--muted)] mt-3 text-sm tracking-wide">May every candle you blow carry a piece of your dream to the stars.</p>
     </div>
   </div>
 </section>
 
 <!-- COUNTDOWN TO NEXT BIRTHDAY -->
-<section class="py-20 px-6 bg-[var(--bg-2)] border-y border-[var(--border)]">
-  <div class="max-w-5xl mx-auto text-center">
-    <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3 reveal">until your next chapter</div>
-    <h2 class="font-display text-3xl md:text-4xl font-light italic mb-10 reveal">The countdown to twenty</h2>
+<section class="py-20 px-6 bg-gradient-to-b from-[var(--bg-2)] to-[var(--bg)] border-y border-[var(--border)] relative overflow-hidden">
+  <div class="orb" style="top:10%;right:10%;width:200px;height:200px;background:var(--cyan);opacity:0.06"></div>
+  <div class="max-w-5xl mx-auto text-center relative z-10">
+    <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3 reveal">until your next chapter</div>
+    <h2 class="font-display text-3xl md:text-4xl font-light italic mb-10 reveal">The countdown to <span class="gradient-text-anim">twenty</span></h2>
     <div class="grid grid-cols-4 gap-4 md:gap-8 reveal" id="countdown">
-      <div>
+      <div class="countdown-box">
         <div class="countdown-num" id="cd-days">--</div>
         <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Days</div>
       </div>
-      <div>
+      <div class="countdown-box">
         <div class="countdown-num" id="cd-hours">--</div>
         <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Hours</div>
       </div>
-      <div>
+      <div class="countdown-box">
         <div class="countdown-num" id="cd-mins">--</div>
         <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Minutes</div>
       </div>
-      <div>
+      <div class="countdown-box">
         <div class="countdown-num" id="cd-secs">--</div>
         <div class="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)] mt-2">Seconds</div>
       </div>
@@ -546,11 +696,22 @@
 </section>
 
 <!-- FINAL WISHES -->
-<section class="py-28 px-6 relative">
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--rose)] opacity-5 blur-3xl pointer-events-none animate-pulse"></div>
+<section class="py-28 px-6 relative overflow-hidden bg-[var(--bg)]">
+  <div class="orb" style="top:20%;left:10%;width:300px;height:300px;background:var(--rose);opacity:0.08"></div>
+  <div class="orb" style="bottom:20%;right:10%;width:350px;height:350px;background:var(--purple);opacity:0.08;animation-delay:5s"></div>
+  <div class="orb" style="top:50%;left:50%;width:250px;height:250px;background:var(--accent-2);opacity:0.06;animation-delay:10s"></div>
+  
+  <i class="fas fa-heart float-icon" style="top:15%;right:10%;font-size:28px;color:var(--rose);animation-delay:0s"></i>
+  <i class="fas fa-star float-icon" style="top:70%;left:8%;font-size:24px;color:var(--accent-2);animation-delay:2s"></i>
+  <i class="fas fa-gem float-icon" style="top:40%;right:5%;font-size:22px;color:var(--cyan);animation-delay:4s"></i>
+  
+  <div class="sparkle" style="top:25%;left:20%;animation-delay:0s"></div>
+  <div class="sparkle" style="top:60%;right:25%;animation-delay:.5s"></div>
+  <div class="sparkle" style="bottom:30%;left:30%;animation-delay:1s"></div>
+  
   <div class="max-w-4xl mx-auto text-center relative z-10">
-    <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3 reveal">and so, my final wish</div>
-    <h2 class="font-display text-5xl md:text-6xl font-light italic mb-12 reveal">For the years ahead</h2>
+    <div class="text-xs tracking-[0.4em] uppercase color-shift font-semibold mb-3 reveal">and so, my final wish</div>
+    <h2 class="font-display text-5xl md:text-6xl font-light italic mb-12 reveal">For the <span class="gradient-text-anim">years ahead</span></h2>
     <div class="space-y-6 text-lg md:text-xl text-[var(--muted)] leading-relaxed max-w-2xl mx-auto reveal">
       <p>May your nineteen be louder than your fears, softer than your worries, and brighter than every candle on your cake.</p>
       <p>May you keep collecting moments like seashells — beautiful, sun-warm, and yours alone.</p>
@@ -558,21 +719,30 @@
     </div>
 
     <div class="mt-20 reveal">
-      <div class="font-script text-6xl md:text-7xl text-[var(--rose-soft)] glow-text">Happy Birthday</div>
-      <div class="font-script text-7xl md:text-8xl mt-2 gradient-text-anim">Ritika</div>
+      <div class="font-dancing text-6xl md:text-7xl text-[var(--rose-soft)] glow-text-color">Happy Birthday</div>
+      <div class="font-dancing text-7xl md:text-9xl mt-2 gradient-text-anim name-glow">Ritika</div>
       <div class="mt-6 text-xs tracking-[0.4em] uppercase text-[var(--muted)]">13 · 08 · 2006 — 13 · 08 · 2025</div>
+      <div class="mt-8 inline-flex items-center gap-3 px-6 py-3 border border-[var(--border)] bg-[var(--card)] backdrop-blur-md">
+        <i class="fas fa-heart text-[var(--rose)] animate-pulse"></i>
+        <span class="text-sm tracking-[0.2em] uppercase text-[var(--muted)]">with all my love,</span>
+        <span class="font-dancing text-2xl gradient-text-anim">Suman Seth</span>
+        <i class="fas fa-heart text-[var(--rose)] animate-pulse"></i>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="py-12 px-6 border-t border-[var(--border)] text-center bg-[var(--bg-2)]">
-  <p class="font-script text-3xl text-[var(--accent)] mb-2">made with love, just for you</p>
-  <p class="text-xs tracking-[0.35em] uppercase text-[var(--muted)]">a surprise by your best friend</p>
-  <div class="mt-6 flex items-center justify-center gap-4 text-[var(--accent-2)] opacity-60">
-    <span class="h-px w-12 bg-current"></span>
-    <i class="fas fa-heart text-xs"></i>
-    <span class="h-px w-12 bg-current"></span>
+<footer class="py-12 px-6 border-t border-[var(--border)] text-center bg-gradient-to-b from-[var(--bg-2)] to-[var(--bg)] relative overflow-hidden">
+  <div class="orb" style="bottom:-50%;left:30%;width:300px;height:300px;background:var(--rose);opacity:0.05"></div>
+  <div class="relative z-10">
+    <p class="font-dancing text-3xl gradient-text-anim mb-2">made with love, just for you</p>
+    <p class="text-xs tracking-[0.35em] uppercase text-[var(--muted)]">a surprise by <span class="color-shift font-semibold">Suman Seth</span></p>
+    <div class="mt-6 flex items-center justify-center gap-4 text-[var(--accent-2)] opacity-60">
+      <span class="h-px w-12 bg-current"></span>
+      <i class="fas fa-heart text-xs animate-pulse"></i>
+      <span class="h-px w-12 bg-current"></span>
+    </div>
   </div>
 </footer>
 
@@ -620,7 +790,8 @@
       startMusic();
       burstConfetti();
       spawnPetals();
-      showToast('Welcome to your surprise, Ritika 💝');
+      spawnBubbles();
+      showToast('Welcome to your surprise, Ritika 💝 — from Suman');
     }, 600);
   }
   giftBox.addEventListener('click', openSurprise);
@@ -692,7 +863,7 @@
   let confetti = [];
   function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   resize(); window.addEventListener('resize', resize);
-  const colors = ['#e91e63','#d4af37','#e8b4a0','#f8bbd0','#fdf2e9','#ec407a','#ff6f00'];
+  const colors = ['#e91e63','#d4af37','#e8b4a0','#f8bbd0','#fdf2e9','#ec407a','#ff6f00','#00e5ff','#1de9b6','#9c27b0','#2196f3'];
 
   function spawnConfetti(x, y, count=80){
     for(let i=0;i<count;i++){
@@ -713,10 +884,10 @@
 
   function burstConfetti(){
     const cx = window.innerWidth/2, cy = window.innerHeight/2;
-    spawnConfetti(cx, cy, 120);
-    setTimeout(()=>spawnConfetti(window.innerWidth*0.3, cy*0.8, 70), 200);
-    setTimeout(()=>spawnConfetti(window.innerWidth*0.7, cy*0.8, 70), 400);
-    setTimeout(()=>spawnConfetti(cx, cy*0.6, 60), 600);
+    spawnConfetti(cx, cy, 150);
+    setTimeout(()=>spawnConfetti(window.innerWidth*0.3, cy*0.8, 80), 200);
+    setTimeout(()=>spawnConfetti(window.innerWidth*0.7, cy*0.8, 80), 400);
+    setTimeout(()=>spawnConfetti(cx, cy*0.6, 70), 600);
   }
 
   function animateConfetti(){
@@ -743,7 +914,7 @@
     petal.className = 'petal';
     const r = Math.random();
     if(r > 0.5){
-      petal.innerHTML = '<i class="fas fa-heart" style="color:'+colors[Math.floor(Math.random()*4)]+';font-size:'+(Math.random()*12+8)+'px;"></i>';
+      petal.innerHTML = '<i class="fas fa-heart" style="color:'+colors[Math.floor(Math.random()*5)]+';font-size:'+(Math.random()*12+8)+'px;"></i>';
     } else {
       const size = Math.random()*10 + 10;
       petal.innerHTML = '<svg width="'+size+'" height="'+size+'" viewBox="0 0 20 20"><path d="M10 2 Q 4 8 4 14 Q 4 18 10 18 Q 16 18 16 14 Q 16 8 10 2" fill="'+colors[Math.floor(Math.random()*colors.length)]+'" opacity="0.7"/></svg>';
@@ -756,8 +927,39 @@
   }
   let petalInterval;
   function spawnPetals(){
-    for(let i=0;i<8;i++) setTimeout(createPetal, i*250);
-    petalInterval = setInterval(createPetal, 500);
+    for(let i=0;i<10;i++) setTimeout(createPetal, i*250);
+    petalInterval = setInterval(createPetal, 400);
+  }
+
+  // Floating Bubbles in background
+  function spawnBubbles(){
+    for(let i=0;i<15;i++){
+      setTimeout(()=>{
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.random()*30 + 10;
+        b.style.width = size + 'px';
+        b.style.height = size + 'px';
+        b.style.left = Math.random()*100 + 'vw';
+        b.style.background = 'radial-gradient(circle at 30% 30%, '+colors[Math.floor(Math.random()*colors.length)]+'40, transparent)';
+        b.style.animationDuration = (Math.random()*10 + 8) + 's';
+        b.style.animationDelay = Math.random()*3 + 's';
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(), 20000);
+      }, i*300);
+    }
+    setInterval(()=>{
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      const size = Math.random()*30 + 10;
+      b.style.width = size + 'px';
+      b.style.height = size + 'px';
+      b.style.left = Math.random()*100 + 'vw';
+      b.style.background = 'radial-gradient(circle at 30% 30%, '+colors[Math.floor(Math.random()*colors.length)]+'40, transparent)';
+      b.style.animationDuration = (Math.random()*10 + 8) + 's';
+      document.body.appendChild(b);
+      setTimeout(()=>b.remove(), 20000);
+    }, 1500);
   }
 
   // Scroll Reveal Animations
@@ -835,7 +1037,7 @@
     setTimeout(()=>{
       document.getElementById('wishMessage').style.opacity = '1';
       burstConfetti();
-      showToast('Happy Birthday Ritika! 🎂');
+      showToast('Happy Birthday Ritika! 🎂 — Love, Suman');
     }, 1200);
     blowBtn.innerHTML = '<i class="fas fa-redo mr-2"></i> Relight candles';
   });
@@ -883,7 +1085,7 @@
   // Click Sparkles
   document.addEventListener('click', e=>{
     if(e.target.closest('button, .photo-card-3d, .gift-box, .lightbox')) return;
-    for(let i=0;i<6;i++){
+    for(let i=0;i<8;i++){
       const s = document.createElement('div');
       s.style.position = 'fixed';
       s.style.left = e.clientX + 'px';
@@ -898,12 +1100,21 @@
       s.style.transition = 'all 1s ease-out';
       document.body.appendChild(s);
       requestAnimationFrame(()=>{
-        const angle = (Math.PI * 2 * i) / 6;
-        s.style.transform = `translate(${Math.cos(angle)*40}px, ${Math.sin(angle)*40}px) scale(0)`;
+        const angle = (Math.PI * 2 * i) / 8;
+        s.style.transform = `translate(${Math.cos(angle)*50}px, ${Math.sin(angle)*50}px) scale(0)`;
         s.style.opacity = '0';
       });
       setTimeout(()=>s.remove(), 1000);
     }
+  });
+
+  // Parallax scroll effect on orbs
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    document.querySelectorAll('.orb').forEach((orb, i) => {
+      const speed = 0.3 + (i % 3) * 0.1;
+      orb.style.transform = `translateY(${scrolled * speed}px)`;
+    });
   });
 </script>
 
