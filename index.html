@@ -30,36 +30,39 @@
   .font-script{font-family:'Caveat',cursive}
   .font-serif-italic{font-family:'Cormorant Garamond',serif;font-style:italic}
 
-  /* Grain */
+  /* Grain Texture */
   body::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:0.04;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   }
 
-  /* Hero bg */
+  /* Animated Gradient Background */
   .hero-bg{
-    background:
-      radial-gradient(ellipse at 18% 25%, rgba(233,30,99,0.22), transparent 55%),
-      radial-gradient(ellipse at 82% 75%, rgba(212,175,55,0.16), transparent 55%),
-      radial-gradient(ellipse at 50% 110%, rgba(232,180,160,0.14), transparent 60%),
-      linear-gradient(180deg,#15080c 0%, #2a1119 50%, #15080c 100%);
+    background:linear-gradient(135deg, #15080c, #2a1119, #3a1722, #2a1119, #15080c);
+    background-size:400% 400%;
+    animation:gradientShift 15s ease infinite;
+  }
+  @keyframes gradientShift{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
   }
 
-  /* Intro */
+  /* Intro Gift */
   .intro-overlay{
     position:fixed;inset:0;background:linear-gradient(135deg,#15080c,#2a1119);
     z-index:1000;display:flex;align-items:center;justify-content:center;
     transition:opacity 1s,visibility 1s;
   }
   .intro-overlay.hidden-intro{opacity:0;visibility:hidden;pointer-events:none}
-
-  .gift-box{position:relative;width:130px;height:130px;cursor:pointer;animation:float 3s ease-in-out infinite;margin:0 auto}
+  .gift-box{position:relative;width:130px;height:130px;cursor:pointer;animation:float 3s ease-in-out infinite;margin:0 auto;perspective:1000px}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   .gift-box .lid{position:absolute;top:0;left:-6px;right:-6px;height:38px;background:linear-gradient(135deg,#e91e63,#ad1457);border-radius:6px;transition:transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);z-index:3;box-shadow:0 4px 10px rgba(0,0,0,.4)}
   .gift-box .body{position:absolute;bottom:0;left:0;right:0;height:92px;background:linear-gradient(135deg,#d4af37,#b88a2a);border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
   .gift-box .ribbon-v{position:absolute;left:50%;top:0;bottom:0;width:14px;background:#e91e63;transform:translateX(-50%);z-index:2}
   .gift-box .ribbon-h{position:absolute;left:-6px;right:-6px;top:16px;height:14px;background:#e91e63;z-index:4}
-  .gift-box .bow{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:38px;color:#e91e63;z-index:5;text-shadow:0 0 20px rgba(233,30,99,.6)}
+  .gift-box .bow{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:38px;color:#e91e63;z-index:5;text-shadow:0 0 20px rgba(233,30,99,.6);animation:wiggle 2s ease-in-out infinite}
+  @keyframes wiggle{0%,100%{transform:translateX(-50%) rotate(-10deg)}50%{transform:translateX(-50%) rotate(10deg)}}
   .gift-box:hover .lid{transform:translateY(-30px) rotate(-8deg)}
 
   /* Petals */
@@ -71,62 +74,71 @@
     100%{transform:translateY(105vh) translateX(120px) rotate(720deg);opacity:0}
   }
 
-  /* Music btn */
+  /* Music Button */
   .music-btn{position:fixed;top:22px;right:22px;z-index:60;width:50px;height:50px;border-radius:50%;background:rgba(232,180,160,0.08);backdrop-filter:blur(12px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .35s;color:var(--accent)}
   .music-btn:hover{background:rgba(232,180,160,0.2);transform:scale(1.1)}
   .music-btn.playing i{animation:spin 3s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .music-btn .eq{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);display:flex;gap:2px}
-  .music-btn .eq span{display:block;width:2px;height:0;background:var(--accent-2);transition:height .2s}
-  .music-btn.playing .eq span{animation:eq 1s ease-in-out infinite}
-  .music-btn.playing .eq span:nth-child(2){animation-delay:.2s}
-  .music-btn.playing .eq span:nth-child(3){animation-delay:.4s}
-  @keyframes eq{0%,100%{height:3px}50%{height:10px}}
 
-  /* Photo card */
-  .photo-card{overflow:hidden;position:relative;cursor:pointer;transition:transform .6s cubic-bezier(.2,.8,.2,1);border-radius:2px}
-  .photo-card:hover{transform:translateY(-6px) scale(1.015)}
-  .photo-card img{transition:transform 1s cubic-bezier(.2,.8,.2,1);width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02)}
-  .photo-card:hover img{transform:scale(1.08);filter:saturate(1.1)}
-  .photo-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(21,8,12,.85));opacity:0;transition:opacity .5s;pointer-events:none}
-  .photo-card:hover::after{opacity:1}
-  .photo-card .label{position:absolute;bottom:14px;left:14px;font-family:'Caveat',cursive;font-size:1.4rem;color:var(--rose-soft);opacity:0;transform:translateY(10px);transition:all .5s;z-index:2}
-  .photo-card:hover .label{opacity:1;transform:translateY(0)}
+  /* 3D Photo Card */
+  .photo-card-3d{overflow:hidden;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .4s ease;border-radius:2px;perspective:1000px}
+  .photo-card-3d .shine{position:absolute;top:0;left:-150%;width:60%;height:100%;background:linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);transform:skewX(-25deg);z-index:2;pointer-events:none;transition:left .8s ease}
+  .photo-card-3d:hover .shine{left:150%}
+  .photo-card-3d img{transition:transform 1s cubic-bezier(.2,.8,.2,1);width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02);animation:kenburns 20s ease-in-out infinite alternate}
+  @keyframes kenburns{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+  .photo-card-3d:hover img{filter:saturate(1.2) contrast(1.05)}
+  .photo-card-3d::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(21,8,12,.85));opacity:0;transition:opacity .5s;pointer-events:none;z-index:1}
+  .photo-card-3d:hover::after{opacity:1}
+  .photo-card-3d .label{position:absolute;bottom:14px;left:14px;font-family:'Caveat',cursive;font-size:1.4rem;color:var(--rose-soft);opacity:0;transform:translateY(10px);transition:all .5s;z-index:2}
+  .photo-card-3d:hover .label{opacity:1;transform:translateY(0)}
 
-  /* Photo frame */
-  .photo-frame{position:relative}
-  .photo-frame::before,.photo-frame::after{content:'';position:absolute;width:32px;height:32px;border:2px solid var(--accent-2);z-index:3}
+  /* Hero Photo Frame */
+  .photo-frame{position:relative;animation:floatY 6s ease-in-out infinite}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+  .photo-frame::before,.photo-frame::after{content:'';position:absolute;width:32px;height:32px;border:2px solid var(--accent-2);z-index:3;transition:all .5s}
   .photo-frame::before{top:-10px;left:-10px;border-right:none;border-bottom:none}
   .photo-frame::after{bottom:-10px;right:-10px;border-left:none;border-top:none}
+  .photo-frame:hover::before{top:-15px;left:-15px}
+  .photo-frame:hover::after{bottom:-15px;right:-15px}
 
-  /* Reveal */
+  /* Reveal Animations */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
   .reveal.in-view{opacity:1;transform:translateY(0)}
+  
+  /* Text Mask Reveal */
+  .mask-reveal{overflow:hidden;display:block}
+  .mask-reveal span{display:inline-block;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in-view .mask-reveal span{transform:translateY(0)}
 
   /* Letter */
   .letter-paper{
-    background:
-      linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98));
+    background:linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98));
     color:#4a1a1f;
     box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 0 120px rgba(180,80,80,.08);
     position:relative;
-    background-image:
-      linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98)),
-      repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(180,80,80,.07) 28px,rgba(180,80,80,.07) 29px);
+    background-image:linear-gradient(135deg,rgba(253,242,233,0.98),rgba(245,228,213,0.98)),repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(180,80,80,.07) 28px,rgba(180,80,80,.07) 29px);
+    transform:rotate(-1deg);
+    transition:transform .8s ease;
   }
+  .letter-paper:hover{transform:rotate(0deg) scale(1.01)}
   .letter-paper::before{content:'';position:absolute;left:50px;top:30px;bottom:30px;width:1px;background:rgba(233,30,99,.25)}
   .letter-paper::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 40px 40px 0;border-color:transparent rgba(0,0,0,.08) transparent transparent}
 
-  /* Memory card */
+  /* Memory Card */
   .memory-card{background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px);transition:all .5s;position:relative;overflow:hidden}
   .memory-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 50%,rgba(232,180,160,.08));opacity:0;transition:opacity .5s}
-  .memory-card:hover{transform:translateY(-6px);border-color:var(--accent-2)}
+  .memory-card:hover{transform:translateY(-6px);border-color:var(--accent-2);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
   .memory-card:hover::before{opacity:1}
-  .memory-card .icon{transition:transform .5s}
-  .memory-card:hover .icon{transform:rotate(-10deg) scale(1.1)}
+  .memory-card .icon{transition:transform .5s;animation:iconFloat 4s ease-in-out infinite}
+  @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .memory-card:hover .icon{animation:none;transform:rotate(-10deg) scale(1.2)}
+  .memory-card .shine-sweep{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right, transparent, rgba(232,180,160,0.15), transparent);transform:skewX(-20deg);transition:left .8s ease}
+  .memory-card:hover .shine-sweep{left:150%}
 
   /* Cake */
-  .cake-container{position:relative;width:320px;height:380px;margin:0 auto}
+  .cake-container{position:relative;width:320px;height:380px;margin:0 auto;animation:floatY 4s ease-in-out infinite}
+  .cake-aura{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle, rgba(232,180,160,0.15), transparent 70%);z-index:-1;animation:pulseAura 4s ease-in-out infinite}
+  @keyframes pulseAura{0%,100%{opacity:0.5;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
   .cake-plate{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:310px;height:18px;background:linear-gradient(180deg,#e8b4a0 0%,#c9a890 50%,#7a5a45 100%);border-radius:50% / 100%;box-shadow:0 10px 30px rgba(0,0,0,.5)}
   .cake-tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:6px}
   .cake-tier.bottom{bottom:14px;width:260px;height:105px;background:linear-gradient(180deg,#f8bbd0 0%,#f48fb1 45%,#c2185b 100%);box-shadow:inset 0 -12px 0 rgba(0,0,0,.15),0 4px 14px rgba(0,0,0,.35)}
@@ -150,7 +162,7 @@
   .lightbox img{max-width:92vw;max-height:86vh;border-radius:4px;box-shadow:0 20px 80px rgba(0,0,0,.7);transform:scale(.9);transition:transform .4s}
   .lightbox.open img{transform:scale(1)}
 
-  /* Confetti canvas */
+  /* Confetti */
   #confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:500}
 
   /* Marquee */
@@ -162,7 +174,7 @@
   ::-webkit-scrollbar-track{background:var(--bg)}
   ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:4px}
 
-  /* Number stat */
+  /* Number Stat */
   .number-stat{font-family:'Fraunces',serif;font-weight:200;font-size:3.6rem;line-height:1;background:linear-gradient(180deg,#e8b4a0,#d4af37);-webkit-background-clip:text;background-clip:text;color:transparent}
   .glow-text{text-shadow:0 0 24px rgba(232,180,160,.45),0 0 48px rgba(233,30,99,.28)}
 
@@ -170,16 +182,33 @@
   .sparkle{position:absolute;width:6px;height:6px;background:var(--accent-2);border-radius:50%;box-shadow:0 0 12px var(--accent-2);animation:sparkle 2s ease-in-out infinite}
   @keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
 
-  /* Counter */
-  .countdown-num{font-family:'Fraunces',serif;font-weight:300;font-size:2.4rem;color:var(--accent-2)}
+  /* Countdown */
+  .countdown-num{font-family:'Fraunces',serif;font-weight:300;font-size:2.4rem;color:var(--accent-2);transition:transform .3s}
+  .countdown-num.pulse{animation:numberPulse .5s ease}
+  @keyframes numberPulse{0%{transform:scale(1)}50%{transform:scale(1.2);color:var(--rose-soft)}100%{transform:scale(1)}}
 
   /* Toast */
   .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(36,16,25,.95);border:1px solid var(--accent);color:var(--fg);padding:14px 24px;border-radius:4px;font-size:.9rem;letter-spacing:.05em;opacity:0;transition:all .4s;z-index:700;backdrop-filter:blur(10px)}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* Hearts on blow */
+  /* Heart Burst on blow */
   .heart-burst{position:fixed;pointer-events:none;z-index:600;font-size:20px;color:var(--rose-soft);animation:heartUp 2s ease-out forwards}
   @keyframes heartUp{0%{opacity:1;transform:translateY(0) scale(.5)}100%{opacity:0;transform:translateY(-200px) scale(1.5)}}
+
+  /* SVG Divider Animation */
+  .divider-svg path{stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 2s ease}
+  .reveal.in-view .divider-svg path{stroke-dashoffset:0}
+
+  /* Animated Gradient Text */
+  .gradient-text-anim{
+    background:linear-gradient(90deg, #e8b4a0, #d4af37, #e91e63, #d4af37, #e8b4a0);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:textShimmer 4s linear infinite;
+  }
+  @keyframes textShimmer{to{background-position:200% center}}
 
   @media (max-width:768px){
     .cake-container{transform:scale(.85)}
@@ -208,7 +237,6 @@
 <!-- MUSIC TOGGLE -->
 <button id="musicBtn" class="music-btn" aria-label="Toggle music">
   <i class="fas fa-music"></i>
-  <div class="eq"><span></span><span></span><span></span></div>
 </button>
 
 <!-- CONFETTI -->
@@ -219,8 +247,8 @@
 
 <!-- HERO -->
 <section class="hero-bg min-h-screen relative flex items-center pt-24 pb-16 overflow-hidden">
-  <div class="absolute top-1/4 left-8 w-72 h-72 rounded-full bg-[var(--rose)] opacity-10 blur-3xl"></div>
-  <div class="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[var(--accent-2)] opacity-10 blur-3xl"></div>
+  <div class="absolute top-1/4 left-8 w-72 h-72 rounded-full bg-[var(--rose)] opacity-10 blur-3xl animate-pulse"></div>
+  <div class="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[var(--accent-2)] opacity-10 blur-3xl animate-pulse" style="animation-delay:1s"></div>
   <div class="sparkle" style="top:20%;left:15%;animation-delay:0s"></div>
   <div class="sparkle" style="top:60%;left:8%;animation-delay:.7s"></div>
   <div class="sparkle" style="top:30%;right:12%;animation-delay:1.2s"></div>
@@ -231,9 +259,15 @@
       <div class="inline-flex items-center gap-3 text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-8 reveal in-view">
         <span class="h-px w-12 bg-[var(--accent)]"></span>A celebration of you
       </div>
-      <h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light leading-[0.95] mb-1 reveal in-view">Happy</h1>
-      <h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light italic leading-[0.95] mb-5 reveal in-view" style="transition-delay:.1s">Birthday</h1>
-      <h2 class="font-script text-7xl md:text-8xl xl:text-[9rem] text-[var(--rose-soft)] glow-text leading-none reveal in-view" style="transition-delay:.2s">Ritika</h2>
+      <div class="reveal in-view">
+        <span class="mask-reveal"><h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light leading-[0.95] mb-1">Happy</h1></span>
+      </div>
+      <div class="reveal in-view" style="transition-delay:.1s">
+        <span class="mask-reveal"><h1 class="font-display text-6xl md:text-7xl xl:text-8xl font-light italic leading-[0.95] mb-5">Birthday</h1></span>
+      </div>
+      <div class="reveal in-view" style="transition-delay:.2s">
+        <span class="mask-reveal"><h2 class="font-script text-7xl md:text-8xl xl:text-[9rem] text-[var(--rose-soft)] glow-text leading-none">Ritika</h2></span>
+      </div>
       <p class="mt-10 text-[var(--muted)] max-w-md text-lg leading-relaxed reveal in-view" style="transition-delay:.3s">
         Today the universe pauses to celebrate the day it received one of its kindest souls, its loudest laughter, and its truest friend.
       </p>
@@ -258,7 +292,7 @@
     <div class="lg:col-span-5 reveal in-view" style="transition-delay:.3s">
       <div class="photo-frame relative">
         <div class="relative overflow-hidden">
-          <img src="https://z-cdn-media.chatglm.cn/files/919c73e8-db42-4c2a-a5a3-2f61f4dcd866.jpeg?auth_key=1886480337-910c01aeab12426ea817358f47b72c41-0-20bfde4885f5134998486bc6b31b137f" alt="Ritika" class="w-full h-[520px] md:h-[620px] object-cover" loading="eager">
+          <img src="https://z-cdn-media.chatglm.cn/files/43904bc9-d88c-4c63-8588-7c2042693c80.jpeg?auth_key=1886481642-bb59059648b8471bb18cd5386ec79529-0-7acb5f7cb493c30c25b6b65b0284e602" alt="Ritika" class="w-full h-[520px] md:h-[620px] object-cover" loading="eager">
           <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/70 via-transparent to-transparent pointer-events-none"></div>
         </div>
         <div class="absolute -bottom-6 -left-6 bg-[var(--bg-2)] border border-[var(--border)] px-6 py-4 backdrop-blur-md">
@@ -296,8 +330,17 @@
   </div>
 </div>
 
+<!-- SVG DIVIDER -->
+<div class="flex justify-center py-12 reveal">
+  <svg class="divider-svg" width="200" height="40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 20 C 40 5, 60 35, 100 20 C 140 5, 160 35, 190 20" stroke="var(--accent-2)" stroke-width="1.5" fill="none"/>
+    <path d="M100 10 L 105 15 L 110 10 L 105 5 Z" fill="var(--rose)"/>
+    <path d="M100 30 L 105 35 L 110 30 L 105 25 Z" fill="var(--rose)"/>
+  </svg>
+</div>
+
 <!-- LETTER -->
-<section class="py-28 md:py-36 px-6 relative">
+<section class="py-12 md:py-20 px-6 relative">
   <div class="max-w-3xl mx-auto">
     <div class="text-center mb-12 reveal">
       <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3">A letter from the heart</div>
@@ -327,34 +370,61 @@
       <p class="mt-4 text-[var(--muted)]">Every frame, a memory. Every memory, a treasure.</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[260px]">
-      <div class="photo-card col-span-2 row-span-2" onclick="openLightbox(0)">
-        <img src="https://z-cdn-media.chatglm.cn/files/94996432-0c2b-42ca-9ccd-b2f837c5dfec.jpeg?auth_key=1886480337-396e1aa219904deab33c9ad023edf758-0-70e0fdf015500d7607e1a7e84db9720e" alt="Ritika" loading="lazy">
-        <span class="label">the smile that started it all</span>
+      
+      <div class="photo-card-3d col-span-2 row-span-2" onclick="openLightbox(0)">
+        <img src="https://z-cdn-media.chatglm.cn/files/43904bc9-d88c-4c63-8588-7c2042693c80.jpeg?auth_key=1886481642-bb59059648b8471bb18cd5386ec79529-0-7acb5f7cb493c30c25b6b65b0284e602" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
+        <span class="label">regal as ever</span>
       </div>
-      <div class="photo-card" onclick="openLightbox(1)">
-        <img src="https://z-cdn-media.chatglm.cn/files/9350fbf0-82af-4bcd-a7ec-a3189187ba1b.jpeg?auth_key=1886480337-13b713ce91dd4516884f86a2f66595d6-0-5ef1aba337483028e6b6700a18f5e846" alt="Ritika" loading="lazy">
+      
+      <div class="photo-card-3d" onclick="openLightbox(1)">
+        <img src="https://z-cdn-media.chatglm.cn/files/c13eacc8-1f9b-4015-88d3-73575a016865.jpeg?auth_key=1886481642-2017e96baea8462d9cb027001442a8be-0-c4b305df898950d2184f7ac10b6dfae6" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
         <span class="label">effortless</span>
       </div>
-      <div class="photo-card" onclick="openLightbox(2)">
+      
+      <div class="photo-card-3d" onclick="openLightbox(2)">
+        <img src="https://z-cdn-media.chatglm.cn/files/94996432-0c2b-42ca-9ccd-b2f837c5dfec.jpeg?auth_key=1886480337-396e1aa219904deab33c9ad023edf758-0-70e0fdf015500d7607e1a7e84db9720e" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
+        <span class="label">the smile that started it all</span>
+      </div>
+      
+      <div class="photo-card-3d col-span-2" onclick="openLightbox(3)">
         <img src="https://z-cdn-media.chatglm.cn/files/919c73e8-db42-4c2a-a5a3-2f61f4dcd866.jpeg?auth_key=1886480337-910c01aeab12426ea817358f47b72c41-0-20bfde4885f5134998486bc6b31b137f" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
         <span class="label">golden hour, golden you</span>
       </div>
-      <div class="photo-card col-span-2" onclick="openLightbox(3)">
-        <img src="https://z-cdn-media.chatglm.cn/files/3415cebf-1ae2-47a0-a81f-89adc86abef6.jpeg?auth_key=1886480337-631ed20a936f47028949b4d751967596-0-8cf6daef7cd1e9834615cd6595c8f59c" alt="Ritika" loading="lazy">
-        <span class="label">in your element</span>
-      </div>
-      <div class="photo-card" onclick="openLightbox(4)">
-        <img src="https://z-cdn-media.chatglm.cn/files/796d9384-c7a8-4766-a011-14b0053462b5.jpeg?auth_key=1886480337-8afbfb1ddf634d0da45d50c77d6240ac-0-fb29d14fd0803462b9b66aa14e9777eb" alt="Ritika" loading="lazy">
+      
+      <div class="photo-card-3d" onclick="openLightbox(4)">
+        <img src="https://z-cdn-media.chatglm.cn/files/9350fbf0-82af-4bcd-a7ec-a3189187ba1b.jpeg?auth_key=1886480337-13b713ce91dd4516884f86a2f66595d6-0-5ef1aba337483028e6b6700a18f5e846" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
         <span class="label">grace</span>
       </div>
-      <div class="photo-card" onclick="openLightbox(5)">
-        <img src="https://z-cdn-media.chatglm.cn/files/f761effd-b77e-4912-8a26-3caff33d6f8b.jpeg?auth_key=1886480337-ce2383848d744b308617a1d9c9215e60-0-391a422fa772b7c09ccab01c457d7ba1" alt="Ritika" loading="lazy">
+      
+      <div class="photo-card-3d" onclick="openLightbox(5)">
+        <img src="https://z-cdn-media.chatglm.cn/files/3415cebf-1ae2-47a0-a81f-89adc86abef6.jpeg?auth_key=1886480337-631ed20a936f47028949b4d751967596-0-8cf6daef7cd1e9834615cd6595c8f59c" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
+        <span class="label">in your element</span>
+      </div>
+      
+      <div class="photo-card-3d" onclick="openLightbox(6)">
+        <img src="https://z-cdn-media.chatglm.cn/files/796d9384-c7a8-4766-a011-14b0053462b5.jpeg?auth_key=1886480337-8afbfb1ddf634d0da45d50c77d6240ac-0-fb29d14fd0803462b9b66aa14e9777eb" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
         <span class="label">thoughtful</span>
       </div>
-      <div class="photo-card col-span-2" onclick="openLightbox(6)">
+      
+      <div class="photo-card-3d" onclick="openLightbox(7)">
+        <img src="https://z-cdn-media.chatglm.cn/files/f761effd-b77e-4912-8a26-3caff33d6f8b.jpeg?auth_key=1886480337-ce2383848d744b308617a1d9c9215e60-0-391a422fa772b7c09ccab01c457d7ba1" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
+        <span class="label">always glowing</span>
+      </div>
+      
+      <div class="photo-card-3d col-span-2" onclick="openLightbox(8)">
         <img src="https://z-cdn-media.chatglm.cn/files/ae7b7c34-e510-4d5e-ab5c-a0aeea3d062b.jpeg?auth_key=1886480337-9e4bc44f1dbf4496b868326af090eee6-0-b91fb2ebaeed18dccddd30844e413980" alt="Ritika" loading="lazy">
+        <div class="shine"></div>
         <span class="label">my favourite view</span>
       </div>
+
     </div>
   </div>
 </section>
@@ -368,32 +438,38 @@
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="memory-card p-8 reveal">
+        <div class="shine-sweep"></div>
         <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-laugh-beam"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Laughter</h3>
         <p class="text-[var(--muted)] leading-relaxed">The kind that fills a room and refuses to leave — turning ordinary afternoons into stories we'll be telling for years.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.1s">
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-shield-heart"></i></div>
+        <div class="shine-sweep"></div>
+        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:.5s"><i class="fas fa-shield-heart"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Strength</h3>
         <p class="text-[var(--muted)] leading-relaxed">The way you face storms without losing your softness. You bend, you never break, and you never let anyone else break either.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.2s">
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-heart"></i></div>
+        <div class="shine-sweep"></div>
+        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:1s"><i class="fas fa-heart"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Heart</h3>
         <p class="text-[var(--muted)] leading-relaxed">Big enough to carry everyone, warm enough to heal what nobody sees. Kindness lives in you like it's the only language you know.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.3s">
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-feather"></i></div>
+        <div class="shine-sweep"></div>
+        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:1.5s"><i class="fas fa-feather"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Spirit</h3>
         <p class="text-[var(--muted)] leading-relaxed">Wild, free, and stubbornly yourself. You don't follow paths — you make them, and somehow make them look easy.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.4s">
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-mug-hot"></i></div>
+        <div class="shine-sweep"></div>
+        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:2s"><i class="fas fa-mug-hot"></i></div>
         <h3 class="font-display text-2xl mb-3">Our Talks</h3>
         <p class="text-[var(--muted)] leading-relaxed">3 AM calls about nothing and everything. The comfortable silences. The inside jokes no one else would ever understand.</p>
       </div>
       <div class="memory-card p-8 reveal" style="transition-delay:.5s">
-        <div class="icon text-3xl text-[var(--accent-2)] mb-4"><i class="fas fa-star"></i></div>
+        <div class="shine-sweep"></div>
+        <div class="icon text-3xl text-[var(--accent-2)] mb-4" style="animation-delay:2.5s"><i class="fas fa-star"></i></div>
         <h3 class="font-display text-2xl mb-3">Your Dreams</h3>
         <p class="text-[var(--muted)] leading-relaxed">The ones you whisper late at night. I'll always be the loudest one cheering in your corner, no matter where they take you.</p>
       </div>
@@ -409,6 +485,7 @@
     <h2 class="font-display text-5xl md:text-6xl font-light italic mb-16 reveal">Blow out the candles</h2>
 
     <div class="cake-container reveal" id="cakeContainer">
+      <div class="cake-aura"></div>
       <div class="candles-row">
         <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
         <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
@@ -470,7 +547,7 @@
 
 <!-- FINAL WISHES -->
 <section class="py-28 px-6 relative">
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--rose)] opacity-5 blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--rose)] opacity-5 blur-3xl pointer-events-none animate-pulse"></div>
   <div class="max-w-4xl mx-auto text-center relative z-10">
     <div class="text-xs tracking-[0.4em] uppercase text-[var(--accent)] mb-3 reveal">and so, my final wish</div>
     <h2 class="font-display text-5xl md:text-6xl font-light italic mb-12 reveal">For the years ahead</h2>
@@ -482,7 +559,7 @@
 
     <div class="mt-20 reveal">
       <div class="font-script text-6xl md:text-7xl text-[var(--rose-soft)] glow-text">Happy Birthday</div>
-      <div class="font-script text-7xl md:text-8xl text-[var(--accent-2)] glow-text mt-2">Ritika</div>
+      <div class="font-script text-7xl md:text-8xl mt-2 gradient-text-anim">Ritika</div>
       <div class="mt-6 text-xs tracking-[0.4em] uppercase text-[var(--muted)]">13 · 08 · 2006 — 13 · 08 · 2025</div>
     </div>
   </div>
@@ -517,18 +594,20 @@
 <div id="toast" class="toast"></div>
 
 <script>
-  // ============ IMAGE LIST ============
+  // Image Array
   const images = [
+    "https://z-cdn-media.chatglm.cn/files/43904bc9-d88c-4c63-8588-7c2042693c80.jpeg?auth_key=1886481642-bb59059648b8471bb18cd5386ec79529-0-7acb5f7cb493c30c25b6b65b0284e602",
+    "https://z-cdn-media.chatglm.cn/files/c13eacc8-1f9b-4015-88d3-73575a016865.jpeg?auth_key=1886481642-2017e96baea8462d9cb027001442a8be-0-c4b305df898950d2184f7ac10b6dfae6",
     "https://z-cdn-media.chatglm.cn/files/94996432-0c2b-42ca-9ccd-b2f837c5dfec.jpeg?auth_key=1886480337-396e1aa219904deab33c9ad023edf758-0-70e0fdf015500d7607e1a7e84db9720e",
-    "https://z-cdn-media.chatglm.cn/files/9350fbf0-82af-4bcd-a7ec-a3189187ba1b.jpeg?auth_key=1886480337-13b713ce91dd4516884f86a2f66595d6-0-5ef1aba337483028e6b6700a18f5e846",
     "https://z-cdn-media.chatglm.cn/files/919c73e8-db42-4c2a-a5a3-2f61f4dcd866.jpeg?auth_key=1886480337-910c01aeab12426ea817358f47b72c41-0-20bfde4885f5134998486bc6b31b137f",
+    "https://z-cdn-media.chatglm.cn/files/9350fbf0-82af-4bcd-a7ec-a3189187ba1b.jpeg?auth_key=1886480337-13b713ce91dd4516884f86a2f66595d6-0-5ef1aba337483028e6b6700a18f5e846",
     "https://z-cdn-media.chatglm.cn/files/3415cebf-1ae2-47a0-a81f-89adc86abef6.jpeg?auth_key=1886480337-631ed20a936f47028949b4d751967596-0-8cf6daef7cd1e9834615cd6595c8f59c",
     "https://z-cdn-media.chatglm.cn/files/796d9384-c7a8-4766-a011-14b0053462b5.jpeg?auth_key=1886480337-8afbfb1ddf634d0da45d50c77d6240ac-0-fb29d14fd0803462b9b66aa14e9777eb",
     "https://z-cdn-media.chatglm.cn/files/f761effd-b77e-4912-8a26-3caff33d6f8b.jpeg?auth_key=1886480337-ce2383848d744b308617a1d9c9215e60-0-391a422fa772b7c09ccab01c457d7ba1",
     "https://z-cdn-media.chatglm.cn/files/ae7b7c34-e510-4d5e-ab5c-a0aeea3d062b.jpeg?auth_key=1886480337-9e4bc44f1dbf4496b868326af090eee6-0-b91fb2ebaeed18dccddd30844e413980"
   ];
 
-  // ============ INTRO ============
+  // Intro Logic
   const intro = document.getElementById('intro');
   const giftBox = document.getElementById('giftBox');
   let celebrationStarted = false;
@@ -547,7 +626,7 @@
   giftBox.addEventListener('click', openSurprise);
   giftBox.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') openSurprise(); });
 
-  // ============ MUSIC (Web Audio API — Happy Birthday melody) ============
+  // Web Audio API Music
   let audioCtx, musicPlaying = false, musicTimer;
   const notes = {C4:262,D4:294,E4:330,F4:349,G4:392,A4:440,B4:494,C5:523,D5:587,E5:659,F5:698,G5:784,A5:880};
   const melody = [
@@ -607,7 +686,7 @@
     else { startMusic(); showToast('Music on'); }
   });
 
-  // ============ CONFETTI ============
+  // Confetti Canvas
   const canvas = document.getElementById('confettiCanvas');
   const ctx = canvas.getContext('2d');
   let confetti = [];
@@ -658,7 +737,7 @@
   }
   animateConfetti();
 
-  // ============ PETALS ============
+  // Floating Petals
   function createPetal(){
     const petal = document.createElement('div');
     petal.className = 'petal';
@@ -681,13 +760,30 @@
     petalInterval = setInterval(createPetal, 500);
   }
 
-  // ============ REVEAL ON SCROLL ============
+  // Scroll Reveal Animations
   const revealObserver = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in-view'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ============ LIGHTBOX ============
+  // 3D Tilt Effect on Photo Cards
+  document.querySelectorAll('.photo-card-3d').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rx = (y - cy) / cy * -8; 
+      const ry = (x - cx) / cx * 8;
+      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+
+  // Lightbox Logic
   let currentImg = 0;
   function openLightbox(i){
     currentImg = i;
@@ -707,12 +803,11 @@
     }
   });
 
-  // ============ CAKE ============
+  // Cake Logic
   const blowBtn = document.getElementById('blowCandlesBtn');
   let candlesBlown = false;
   blowBtn.addEventListener('click', ()=>{
     if(candlesBlown){
-      // reset
       document.querySelectorAll('.flame').forEach(f => f.classList.remove('out'));
       document.querySelectorAll('.smoke').forEach(s => s.classList.remove('rise'));
       document.getElementById('wishMessage').style.opacity = '0';
@@ -727,7 +822,6 @@
       setTimeout(()=>{
         f.classList.add('out');
         smokes[i].classList.add('rise');
-        // hearts
         const rect = f.getBoundingClientRect();
         const h = document.createElement('div');
         h.className = 'heart-burst';
@@ -746,26 +840,37 @@
     blowBtn.innerHTML = '<i class="fas fa-redo mr-2"></i> Relight candles';
   });
 
-  // ============ COUNTDOWN (to next 13 Aug) ============
+  // Countdown Timer
+  let prevSecs = -1;
   function updateCountdown(){
     const now = new Date();
     let year = now.getFullYear();
-    let target = new Date(year, 7, 13, 0, 0, 0); // Aug 13 (month is 0-indexed)
+    let target = new Date(year, 7, 13, 0, 0, 0); 
     if(now > target) target = new Date(year + 1, 7, 13, 0, 0, 0);
     const diff = target - now;
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
+    
     document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
     document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+    
+    const secEl = document.getElementById('cd-secs');
+    secEl.textContent = String(s).padStart(2,'0');
+    
+    if(s !== prevSecs){
+      secEl.classList.remove('pulse');
+      void secEl.offsetWidth; 
+      secEl.classList.add('pulse');
+      prevSecs = s;
+    }
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ============ TOAST ============
+  // Toast Notifications
   let toastTimer;
   function showToast(msg){
     const t = document.getElementById('toast');
@@ -775,9 +880,9 @@
     toastTimer = setTimeout(()=>t.classList.remove('show'), 3000);
   }
 
-  // ============ CLICK SPARKLES ============
+  // Click Sparkles
   document.addEventListener('click', e=>{
-    if(e.target.closest('button, .photo-card, .gift-box, .lightbox')) return;
+    if(e.target.closest('button, .photo-card-3d, .gift-box, .lightbox')) return;
     for(let i=0;i<6;i++){
       const s = document.createElement('div');
       s.style.position = 'fixed';
